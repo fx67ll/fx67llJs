@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>关于时间的相关操作</title>
+	</head>
+	<body>
+		<h1>复习的时候请打开网页看看以下的标题方法是否还记得！！！</h1>
+		<h4>获取当前年份</h4>
+		<h4>获取当前完整年份</h4>
+		<h4>---------------------------------------</h4>
+		<h4>获取当前月份</h4>
+		<h4>获取当前星期</h4>
+		<h4>获取当前日</h4>
+		<h4>---------------------------------------</h4>
+		<h4>获取当前秒</h4>
+		<h4>获取当前小时数</h4>
+		<h4>获取当前分钟数</h4>
+		<h4>获取当前秒数</h4>
+		<h4>获取当前毫秒数</h4>
+		<h4>---------------------------------------</h4>
+		<h4>获取当前日期</h4>
+		<h4>获取当前时间</h4>
+		<h4>获取当前日期时间</h4>
+		<h4>---------------------------------------</h4>
+		<h5>下面是日期时间脚本库方法列表</h5>
+		<h5>-----------------------------------------------</h5>
+		<h5>后期总结一些好的时间操作方法再继续深入</h5>
+		<script type="text/javascript">
+			var dateObj = new Date();
+			console.log("获取当前年份（getYear返回的是距1900年1月1日的年份）"+"----"+dateObj.getYear());
+			console.log("获取当前完整年份"+"----"+dateObj.getFullYear());
+			console.log("--------------------------------------------------------");
+			console.log("获取当前月份（getMonth返回的是上一个月的日期，需要加1处理一下）"+"----"+(dateObj.getMonth()+1));
+			console.log("获取当前星期"+"----"+dateObj.getDay());
+			console.log("获取当前日"+"----"+dateObj.getDate());
+			console.log("--------------------------------------------------------");
+			console.log("获取当前秒（getTime返回的是从1970.1.1开始的毫秒数）"+"----"+dateObj.getTime());
+			console.log("获取当前小时数"+"----"+dateObj.getHours());
+			console.log("获取当前分钟数"+"----"+dateObj.getMinutes());
+			console.log("获取当前秒数"+"----"+dateObj.getSeconds());
+			console.log("获取当前毫秒数"+"----"+dateObj.getMilliseconds());
+			console.log("--------------------------------------------------------");
+			console.log("获取当前日期"+"----"+dateObj.toLocaleDateString());
+			console.log("获取当前时间"+"----"+dateObj.toLocaleTimeString());
+			console.log("获取当前日期时间"+"----"+dateObj.toLocaleString());
+			console.log("--------------------------------------------------------");
+			console.log("下面是日期时间脚本库方法列表");
+			console.log("--------------------------------------------------------");
+			console.log("后期总结一些好的时间操作方法再继续深入");
+		</script>
+	</body>
+</html>

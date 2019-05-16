@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>随机排序</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//先搞清楚如何生成随机数，所以先写点预备知识巩固下如何获取随机数
+
+		//查看Math对象所有的方法
+		console.dir(Math);
+
+		//Math对象常用方法测试
+		//1.获取绝对值
+		console.log("绝对值是：" + Math.abs(-1));
+		//2.向上取整和向下取整,特别用极端的数字试试
+		console.log("取整结果是：" + Math.ceil(1.01) + "--" + Math.floor(1.99));
+		//3.四舍五入取整
+		console.log("取整结果是：" + Math.round(1.01) + "--" + Math.round(1.99));
+		//4.随机取[0,1]之间的小数
+		console.log("随机数是：" + Math.random());
+		//5.取得一组数据中的最大值和最小值,注意使用这个方法不能直接放入数组
+		console.log("取极值是：" + Math.max(1, 4, 2, 6, 3, 12) + "--" + Math.min(1, 4, 2, 6, 3, 12));
+		//6.获取圆周率
+		console.log("圆周率是：" + Math.PI);
+		//7.取幂pow和开方sqrt
+		console.log("取幂的结果是：" + Math.pow(100, 2));
+		console.log("开方的结果是：" + Math.sqrt(100));
+
+
+		//Math常用实例方法
+		//1.获取[0,10]的随机整数
+		console.log("0~10随机数是：" + Math.round(Math.random() * 10))
+		//2.获取[n,m]之间的随机整数
+		var n = 100;
+		var m = 111;
+		console.log("n~m随机数是：" + Math.round(Math.random() * (m - n) + n))
+		//3.获取数组中的最大值
+		var arr = [3, 1, 4, 2, 6, 3, 12];
+		//由于max()里面参数不能为数组，所以借助apply(funtion,args)方法调用Math.max()，function为要调用的方法，args是数组对象
+		//当function为null时，默认为上文,即相当于apply(Math.max,arr)
+		console.log("数组中最大值是1：" + Math.max.apply(null, arr));
+		//call()与apply()类似，区别是传入参数的方式不同，apply()参数是一个对象和一个数组类型的对象，call()参数是一个对象和参数列表
+		console.log("数组中最大值是2：" + Math.max.call(null, 1, 4, 2, 6, 3, 12));
+		//sort()方法用于对数组的元素进行排序，并返回数组，默认排序顺序是根据字符串UniCode码
+		//因为排序是按照字符串UniCode码的顺序进行排序的，所以首先应该把数组元素都转化成字符串（如有必要），以便进行比较
+		//语法：arrayObject.sort(sortby);
+		//参数sortby  可选，用来规定排序的顺序，但必须是函数
+		//比较函数应该具有两个参数 a 和 b，其返回值如下：
+		//若 a 小于 b，即 a - b 小于零，则返回一个小于零的值，数组将按照升序排列
+		//若 a 等于 b，则返回 0
+		//若 a 大于 b, 即 a - b 大于零，则返回一个大于零的值，数组将按照降序排列
+		function sortNum(a, b) {
+			return a - b;
+		}
+		console.log("数组中最大值是3：" + arr.sort(sortNum).reverse()[0]);
+
+
+		//根据Math常用实例方法的第三项引申出来的
+		//1.按照数组对象中某个属性值进行排序,这波操作是真的骚,这个匹配方法的函数我是没看懂
+		var arrObj = [{
+				name: "n1",
+				id: 1
+			},
+			{
+				name: "n2",
+				id: 2
+			},
+			{
+				name: "n3",
+				id: 3
+			}
+		];
+
+		function sortCompare(prop) {
+			return function(a, b) {
+				var value1 = a[prop];
+				var value2 = b[prop];
+				return value1 - value2;
+			}
+		}
+		console.log("数组中id最大的是1：" + JSON.stringify(arrObj.sort(sortCompare('id')).reverse()[0]));
+		//2.根据参数来确定是升序还是降序,这波更骚了卧槽
+		function sortCompareUnknow(attr, rev) {
+			//判断第二参数是否传了,没传默认升序排列
+			if (rev == undefined) {
+				rev = 1;
+			} else {
+				rev = (rev) ? 1 : -1
+			}
+			return function(a, b) {
+				a = a[attr];
+				b = b[attr];
+				if (a < b) {
+					return rev * -1;
+				}
+				if (a > b) {
+					return rev * 1;
+				}
+				return 0;
+			}
+		}
+		console.log("数组中id最大的是2：" + JSON.stringify(arrObj.sort(sortCompareUnknow("id", true)).reverse()[0]));
+		console.log("数组中id最大的是3：" + JSON.stringify(arrObj.sort(sortCompareUnknow("id", false))[0]));
+
+
+		//逛外站看到一个很有意思的题目,不知道答案怎么来的,先记着好了
+		//实现一个返回随机数的函数，要求如下：
+		//1.不可以使用Math.random()
+		//2.有一个函数 Rand() 返回1-5的随机数
+		//知乎对于这几个数字的解释 https://www.zhihu.com/question/22818104 没看懂
+		rand = (function() {
+			var today = new Date();
+			var seed = today.getTime();
+
+			function rnd() {
+				seed = (seed * 9301 + 49297) % 233280;
+				return seed / (233280.0);
+			};
+			return function rand(number) {
+				return Math.ceil(rnd() * number);
+			};
+		})();
+		console.log(rand(5));
+
+
+		//js生成不重复的随机数组（最高效，递归）
+		//百度搜到的第一页的一个写的很有意思，有时间研究一波,可以先当工具类用
+		//来源 https://blog.csdn.net/qilin001cs/article/details/84637824
+		var bossRand = function(mynum, mywei, callback) {
+			var RandomArr = [];
+			var RandomTotal = 0;
+			function createRandom(num, wei) {
+				if (RandomArr.length == 0) {
+					RandomTotal = num;
+				}
+				var start = "1";
+				var end = "9";
+				var wint = parseInt(wei);
+				for (var i = 1; i < wint; i++) {
+					start += "0"
+					end += "0";
+				}
+				for (var i = 0; i < parseInt(num); i++) {
+					var code = parseInt(Math.random() * parseInt(end) + parseInt(start));
+					var str = "," + RandomArr.toString() + ",";
+					if (str.indexOf("," + code + ",") == -1) {
+						RandomArr.push(code);
+					}
+				}
+				//Remove duplication
+				var cha = RandomTotal - RandomArr.length;
+				if (cha <= 0) {
+					callback(RandomArr)
+					RandomArr = [];
+					RandomTotal = 0;
+					return;
+				} else {
+					createRandom(cha, wei)
+				}
+			}
+			createRandom(mynum, mywei);
+		}
+		bossRand(5, 1, function(arr){console.log(arr)});
+	</script>
+</html>

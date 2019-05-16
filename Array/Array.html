@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组基本操作方法</title>
+	</head>
+	<body>
+		<h1>数组基本操作方法</h1>
+		<h1>concat() / join()</h1>
+		<h1>slice() / splice() / substr() / splice()</h1>
+		<h1>push() / pop() / unshift() / shift()</h1>
+		<h1>sort() / reverse()</h1>
+		<h1>indexOf() / lastIndexOf()</h1>
+		<h1>every() / some() / filter() / map()</h1>
+		<h1>forEach()</h1>
+		<h1></h1>
+		<h1></h1>
+		<script type="text/javascript">
+			console.log("concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组,仅会返回被连接数组的一个副本,不改变原数组。");
+			var arr0 = [1, 2, 4, 5, 6];
+			var arr1 = [1, 2, 0];
+			console.log(arr0 + "--concat--" + arr1);
+			console.log(arr0.concat(arr1));
+			console.log("----------------------------------------------------------");
+
+			console.log("join() 方法用于把数组中的所有元素放入一个字符串。元素是通过指定的分隔符进行分隔的,默认使用','号分割,不改变原数组。");
+			var arr2 = [1, 2, 4, 5, 6];
+			var arr3 = [1, 2, 0];
+			console.log(arr2.join());
+			console.log(arr3.join("-----"));
+			console.log("----------------------------------------------------------");
+
+			console.log("push() 方法可向数组的末尾添加一个或多个元素,并返回新的长度。末尾添加,返回的是长度,改变原数组。");
+			var arr4 = [1, 2, 4, 5, 6];
+			var arr5 = [1, 2, 0];
+			var num6 = 101;
+			console.log(arr4.push(arr5));
+			console.log(arr4.push(num6));
+			console.log(arr4);
+			console.log("----------------------------------------------------------");
+
+			console.log("pop() 方法用于删除最后一个元素并返回数组的最后一个元素。返回最后一个元素,改变原数组。");
+			var arr7 = [1, 2, 4, 5, 6];
+			console.log(arr7.pop());
+			console.log(arr7);
+			console.log("----------------------------------------------------------");
+
+			console.log("unshift() 方法可向数组的开头添加一个或更多元素,并返回新的长度。返回新长度,改变原数组。");
+			var arr8 = [1, 2, 4, 5, 6];
+			var arr9 = [1, 2, 0];
+			var num10 = 102;
+			console.log(arr8.unshift(arr9));
+			console.log(arr8.unshift(num10));
+			console.log(arr8);
+			console.log("----------------------------------------------------------");
+
+			console.log("shift() 方法用于把数组的第一个元素从其中删除,并返回第一个元素的值。返回第一个元素,改变原数组。");
+			var arr11 = [1, 2, 4, 5, 6];
+			console.log(arr11.shift());
+			console.log(arr11);
+			console.log("----------------------------------------------------------");
+
+			console.log("slice() 返回一个新的数组,包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。返回选定的元素,不改变原数组。");
+			var arr12 = [1, 2, 4, 5, 6];
+			console.log(arr11.slice(0, 2));
+			console.log(arr11);
+			console.log("----------------------------------------------------------");
+
+			console.log("splice() 方法可删除从 index 处开始的零个或多个元素,并且用参数列表中声明的一个或多个值来替换那些被删除的元素。");
+			console.log("如果从 arrayObject 中删除了元素,则返回的是含有被删除的元素的数组。splice() 方法会直接对数组进行修改,改变原数组。");
+			var arr13 = [1, 2, 4, 5, 6, 3, 4, 2, 2];
+			var arr14 = [6, 5, 4, 4, 3];
+			var arr15 = [12, 321, 321, 43, 432, 4234, 2342, 423];
+			console.log(arr13.splice(2)); //从index2开始,全删了
+			console.log(arr13);
+			console.log(arr14.splice(2, 3)); //从index2开始,删除3个
+			console.log(arr14);
+			console.log(arr15.splice(2, 6, 1, 1, 1, 1, [1, 2], "3e2321")); //从2开始删,删6个,后面的全是插入到2之后的参数
+			console.log(arr15);
+			console.log("----------------------------------------------------------");
+
+			console.log("substring() 和 substr(),不改变。原）数组");
+			console.log("相同点：如果只是写一个参数,两者的作用都一样：都是是截取字符串从当前下标以后直到字符串最后的字符串片段。");
+			console.log("不同点：第二个参数作用不同。substr（startIndex,lenth）： 第二个参数是截取字符串的长度（从起始点截取某个长度的字符串）；")
+			console.log("substring（startIndex, endIndex）： 第二个参数是截取字符串最终的下标 （截取2个位置之间的字符串,‘含头不含尾’）。")
+			var str17 = "123456789";
+			console.log(str17.substr(3));
+			console.log(str17.substring(3));
+			console.log(str17.substr(3, 5));
+			console.log(str17.substring(3, 5));
+			console.log(str17);
+			console.log("----------------------------------------------------------");
+
+			console.log("sort 排序,按照 Unicode code 位置排序,默认升序,会改变原数组。");
+			var arr18 = ['cherries', 'apples', 'bananas'];
+			console.log(arr18.sort());
+			console.log(arr18);
+			var arr19 = [1, 10, 21, 2];
+			console.log(arr19.sort());
+			console.log(arr19);
+			console.log("----------------------------------------------------------");
+
+			console.log("reverse() 方法用于颠倒数组中元素的顺序。返回的是颠倒后的数组,会改变原数组。");
+			var arr20 = [1, 10, 21, 2];
+			console.log(arr20.reverse());
+			console.log(arr20);
+			console.log("----------------------------------------------------------");
+
+			console.log(
+				"indexOf() 和 lastIndexOf() ,都接受两个参数：查找的值、查找起始位置,不存在，返回 -1。存在,返回位置。indexOf 是从前往后查找,lastIndexOf 是从后往前查找。都不会改变原数组。");
+			var arr21 = [1, 2, 3, 4, 5, 6, 6, 7];
+			console.log(arr21.indexOf(0, 10));
+			console.log(arr21.indexOf(6));
+			console.log(arr21.lastIndexOf(10, 10));
+			console.log(arr21.lastIndexOf(6));
+			console.log(arr21);
+			console.log("----------------------------------------------------------");
+
+			console.log("every() 对数组的每一项都运行给定的函数，每一项都返回 ture,则返回 true,不会改变原数组。");
+			var arr22 = [1, 2, 3, 4, 5, 6, 6, 7];
+
+			function isBigEnough(element, index, array) {
+				return element < 10;
+			}
+			console.log(arr22.every(isBigEnough));
+			console.log(arr22);
+			console.log("----------------------------------------------------------");
+
+			console.log("some() 对数组的每一项都运行给定的函数，任意一项都返回 ture,则返回 true,不会改变原数组。");
+			var arr23 = [1, 12, 13, 14, 15, 16, 16, 17];
+
+			function isBigEnough(element, index, array) {
+				return element < 10;
+			}
+			console.log(arr23.some(isBigEnough));
+			console.log(arr22);
+			console.log("----------------------------------------------------------");
+
+			console.log("filter() 对数组的每一项都运行给定的函数，返回结果为 ture 的项组成的数组,不会改变原数组。");
+			var words = ["spray", "limit", "elite", "exuberant", "destruction", "present", "happy"];
+			var longWords = words.filter(function(word) {
+				return word.length > 6;
+			});
+			console.log(longWords);
+			console.log(words);
+			console.log("----------------------------------------------------------");
+			
+			console.log("map() 对数组的每一项都运行给定的函数，返回每次函数调用的结果组成一个新数组。");
+			var numbers = [1, 5, 10, 15];
+			var doubleNum = numbers.map(function(x) {
+			   return x * 2;
+			});
+			console.log(doubleNum);
+			console.log(numbers);
+			console.log("----------------------------------------------------------");
+			
+			console.log("forEach() 数组遍历");
+			const items = ['item1', 'item2', 'item3'];
+			const copy = [];    
+			items.forEach(function(item){//array.forEach(function(currentValue, index, arr), thisValue),currentValue必需,当前元素;index可选,当前元素的索引值;arr可选,当前元素所属的数组对象。
+			  copy.push(item);
+			});
+			console.log(copy);
+			console.log(items);
+			console.log("----------------------------------------------------------");
+			
+			console.log("明天再来继续看看ES6的数组相关操作函数");
+			
+		</script>
+	</body>
+</html>

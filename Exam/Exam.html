@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>每日刷题知识盲点记录</title>
+		<h4>()代表立刻执行,settimeout调用的时候一定不能带上</h4><br>
+		<p>
+			<h4>hasOwnProperty</h4> 是用来判断一个对象是否有你给出名称的属性或对象。<br>不过需要注意的是，此方法无法检查该对象的原型链中是否具有该属性，该属性必须是对象本身的一个成员。
+			<h4>isPrototypeOf</h4> 是用来判断要检查其原型链的对象是否存在于指定对象实例中，是则返回true，否则返回false。<br>
+			<h4>hasOwnProperty</h4> 从字面上理解，是属于自己私有的属性，不是公共的。因此，只能是检测实例自己的属性，不能是原型对象上的属性。<br>
+			<h4>hasPrototypeProperty</h4> 从字面上就可以知道是检测原型对象上的属性。<br><br><br>
+		</p>
+		<p>
+			<h3>Number()可以用于任何数据类型的转换。转换规则如下：</h3>
+			<h4>1.如果是Boolean值，true和false将分别被转换为1或0</h4>
+			<h4>2.如果是null值，返回0</h4>
+			<h4>3.如果是undefined，返回NaN</h4>
+			<h4>4.如果是字符串则遵循以下规则</h4>
+			<h5>a.字符串只把含数字（包含前面带正号或负号的情况），则将其转换为十进制数值，前导零会被忽略。（例如“011”会变成11）</h5>
+			<h5>b.如果字符串中包含有效的浮点格式，则将其转换为相应的浮点数值,前导零会被忽略</h5>
+			<h5>c.如果字符串中包含十六进制格式，则将其转换为相同大小的十进制整数；//number("01f")=31</h5>
+			<h5>d.如果字符串是空的，则将其转换为0；//number(" ")=0</h5>
+			<h5>e.如果字符串中包含除以上格式之外的字符，则将其转换为NaN.//number("helloworld")=NaN</h5>
+			<h4>5.如果是数值，不用说当然是传啥返啥</h4>
+			<h4>6.如果是对象，则调用对象的valueOf()方法，然后依照前面的规则转换返回的值。如果转换的结果是NaN，则调用对象的toString()方法，然后再次按照前面的规则转换返回的字符串值</h4><br>
+		</p>
+		<p>
+			<h3>@import和link区别如下：（了解一下即可）</h3>
+			1. @import url（）机制是不同于link的，link是在加载页面前把css加载完毕，而@import url（）则是读取完文件后在加载，所以会出现一开始没有css样式，闪烁一下出现样式后的页面(网速慢的情况下)<br>
+			2. @import 是css2里面的，所以古老的ie5不支持<br>
+			3. 当使用javascript控制dom去改变样式的时候，只能使用link标签，因为@import不是dom可以控制的<br>
+			4. link除了能加载css外还能定义RSS，定义rel连接属性，@import只能加载css<br><br><br>
+		</p>
+		<h4>超链接访问过后hover样式就不出现了，被点击访问过的超链接样式不再具有hover和active了，解决方法是改变CSS属性的排列顺序: L-V-H-A（link,visited,hover,active）</h4><br>
+		<h4>head 标签是设计用于一些静态资源的预加载，与“解析”没有任何关系，浏览器会先加载 head 标签内的静态资源（css 和 js），这时候的 js 并没有执行，而是被 UI 线程阻塞了，然后要注意的是，浏览器在解析 body
+			内的样式以及 script 标签的时候是串行的，就是说你的 script 标签内的代码会即时执行，然后再去解析下面标签的內联样式（这也是为什么內联样式的优先级会比引用的高）</h4><br>
+		<h4>设置readonly = true，页面上无法修改内容，但是可以通过JavaScript修改,内容会被提交<br>
+			设置disabled = true,无法修改内容，也不会被提交<br><br><br>
+		</h4>
+		<h4>
+			代码回收规则如下：<br>
+			1.全局变量不会被回收<br>
+			2.局部变量会被回收，也就是函数一旦运行完以后，函数内部的东西都会被销毁<br>
+			3.只要被另外一个作用域所引用就不会被回收<br><br>
+		</h4>
+		<h4>1.数组也是对象；<br>2.对象不能用length返回其拥有的属性数量<br></h4><br>
+		<h4>utf-8 全球通用的编码</h4><br>
+		<h4>
+			解释型语言的特性有什么?<br>
+			非独立：JavaScript语言依赖执行环境，对于客户端来说是浏览器，对于服务端来说是node。<br>
+			效率低：执行前不需要编译，执行时才编译，因此效率低。<br>
+		</h4><br><br>
+		<h4>
+			onBlur:当失去输入焦点后产生该事件<br>
+			onFocus:当输入获得焦点后，产生该文件<br>
+			onchange:当文字值改变时，产生该事件<br>
+			onselect:当文字加亮后，产生该事件<br>
+			onClick：当组件被点击时产生的事件<br><br><br>
+		</h4>
+		<h4>摘自《JavaScript高级程序设计》<br>
+			函数声明<br>
+			function sum(a,b){<br>
+			return a+b<br>
+			}<br>
+			函数表达式<br>
+			var sum = function(a,b){<br>
+			return a+b<br>
+			}<br>
+			Function构造函数【从技术角度讲，这是一个函数表达式】<br>
+			var sum = new Function('a','b','return a+b')//不推荐使用，影响函数解析性能<br><br><br>
+		</h4>
+		<h4>
+			<h1>跨域问题解决方案大全（只是记录了没有深入研究实践这个）</h1><br>
+			1.CORS<br>
+			CORS（Corss-Origin Resource Sharing,跨资源共享），基本思想是使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应的成功或失败。<br>
+			即给请求附加一个额外的Origin头部，其中包含请求页面的源信息（协议、域名和端口），以便服务器根据这个头部决定是否给予响应。<br><br>
+			2.document.domain<br>
+			将页面的document.domain设置为相同的值，页面间可以互相访问对方的JavaScript对象。<br>
+			注意：<br><br>
+			不能将值设置为URL中不包含的域；<br>
+			松散的域名不能再设置为紧绷的域名。<br><br>
+			3.图像Ping<br>
+			var img=new Image();<br>
+			img.onload=img.onerror=function(){<br>
+			... ...<br>
+			}<br>
+			img.src="url?name=value";<br>
+			请求数据通过查询字符串的形式发送，响应可以是任意内容，通常是像素图或204响应。<br>
+			图像Ping最常用于跟踪用户点击页面或动态广告曝光次数。<br>
+			缺点：<br>
+			只能发送GET请求；<br>
+			无法访问服务器的响应文本，只能用于浏览器与服务器间的单向通信。<br><br>
+			4.Jsonp<br>
+			var script=document.createElement("script");<br>
+			script.src="url?callback=handleResponse";<br>
+			document.body.insertBefore(script,document.body.firstChild);<br>
+			JSONP由两部分组成：回调函数和数据<br>
+			回调函数是接收到响应时应该在页面中调用的函数，其名字一般在请求中指定。<br>
+			数据是传入回调函数中的JSON数据。<br>
+			优点：<br>
+			能够直接访问响应文本，可用于浏览器与服务器间的双向通信。<br>
+			缺点：<br>
+			JSONP从其他域中加载代码执行，其他域可能不安全；<br>
+			难以确定JSONP请求是否失败。<br><br>
+			5.Comet<br>
+			Comet可实现服务器向浏览器推送数据。<br>
+			Comet是实现方式：长轮询和流短轮询即浏览器定时向服务器发送请求，看有没有数据更新。<br>
+			长轮询即浏览器向服务器发送一个请求，然后服务器一直保持连接打开，直到有数据可发送。<br>
+			发送完数据后，浏览器关闭连接，随即又向服务器发起一个新请求。<br>
+			其优点是所有浏览器都支持，使用XHR对象和setTimeout()即可实现。<br>
+			流即浏览器向服务器发送一个请求，而服务器保持连接打开，然后周期性地向浏览器发送数据，页面的整个生命周期内只使用一个HTTP连接。<br><br>
+			6.WebSocket<br>
+			WebSocket可在一个单独的持久连接上提供全双工、双向通信。<br>
+			WebSocket使用自定义协议，未加密的连接时ws://；加密的链接是wss://。<br>
+			var webSocket=new WebSocket("ws://");<br>
+			webSocket.send(message);<br>
+			webSocket.onmessage=function(event){<br>
+			var data=event.data;<br>
+			... ....<br>
+			}<br>
+			注意：<br>
+			必须给WebSocket构造函数传入绝对URL；<br>
+			WebSocket可以打开任何站点的连接，是否会与某个域中的页面通信，完全取决于服务器；<br>
+			WebSocket只能发送纯文本数据，对于复杂的数据结构，在发送之前必须进行序列化JSON.stringify(message))。<br>
+			优点：<br>
+			在客户端和服务器之间发送非常少的数据，减少字节开销。<br>
+		</h4>
+		<h4>
+			javascript中实现跨域的方式总结: <br>
+			第一种方式：jsonp请求；jsonp的原理是利用"script"标签的跨域特性， 可以不受限制地从其他域中加载资源， 类似的标签还有"img"<br>
+			第二种方式： document.domain； 这种方式用在主域名相同子域名不同的跨域访问中<br>
+			第三种方式： window.name； window的name属性有个特征： 在一个窗口(window) 的生命周期内, 窗口载入的所有的页面都是共享一个window.name的， 每个页面对window.name都有读写的权限， window.name是持久存在一个窗口载入过的所有页面中的， 并不会因新页面的载入而进行重置<br>
+			第四种方式： window.postMessage； window.postMessages是html5中实现跨域访问的一种新方式， 可以使用它来向其它的window对象发送消息， 无论这个window对象是属于同源或不同源<br>
+			第五种方式： CORS； CORS背后的基本思想， 就是使用自定义的HTTP头部让浏览器与服务器进行沟通， 从而决定请求或响应是应该成功还是应该失败<br>
+			第六种方式： Web Sockets； web sockets原理： 在JS创建了web socket之后， 会有一个HTTP请求发送到浏览器以发起连接。 取得服务器响应后， 建立的连接会使用HTTP升级从HTTP协议交换为web sockt协议<br>
+		</h4>
+	</head>
+	<body>
+		<script type="text/javascript">
+			// 若创建数组中间有下标直接跳过,会自动填补empty,输出undefined
+			var a = [];
+			a[0] = 1, a[1] = 2, a[2] = 3, a[5] = 4;
+			console.log(a);
+			console.log(a.length);
+			console.log(a[4]);
+			console.log("-------------------------------------------");
+
+			// undefined值是派生自null值的，因此ECMA-262规定对它们的相等性测试要返回true。
+			// ==仅判断值是否相同，undefined值和null是相同的，故true
+			// ===在判断值是否相同的同时还判断类型是否相同，undefined类型为undefined，null类型为object，因此为false
+			console.log(null == undefined);
+			console.log(null === undefined);
+			console.log("-------------------------------------------");
+
+			// js如何判断一个对象是不是Array
+			var arr = [];
+			console.log(Object.prototype.toString.call(arr) === '[object Array]');
+			console.log("-------------------------------------------");
+
+			// Number() 函数把对象的值转换为数字
+			// 如果参数是 Date 对象，Number() 返回从 1970 年 1 月 1 日至今的毫秒数
+			// 如果对象的值无法转换为数字，那么 Number() 函数返回 NaN
+			var date = new Date();
+			var obj = new Object();
+			var boolean0 = true;
+			var boolean1 = false;
+			console.log("以下是Number函数部分返回规则的情况");
+			console.log("date" + "--" + Number(date));
+			console.log("obj" + "--" + Number(obj));
+			console.log("boolean0" + "--" + Number(boolean0));
+			console.log("boolean1" + "--" + Number(boolean1));
+			console.log("以下是Number函数会返回0的情况");
+			console.log("()" + "--" + Number());
+			console.log("(0)" + "--" + Number(0));
+			console.log("('')" + "--" + Number(''));
+			console.log("('0')" + "--" + Number('0'));
+			console.log("(false)" + "--" + Number(false));
+			console.log("(null)" + "--" + Number(null));
+			console.log("([])" + "--" + Number([]));
+			console.log("([0])" + "--" + Number([0]));
+			console.log("-------------------------------------------");
+
+			// for in遍历对象所拥有的属性(可枚举的) 由于对象和数组不同，不能用下标来访问，只能用for in遍历
+			// 使用 for in 循环遍历对象的属性时，原型链上的所有属性都将被访问
+			// 推荐总是使用 hasOwnProperty 方法，这将会避免原型对象扩展带来的干扰
+			Object.prototype.bar = 10;
+			var obj = {
+				"name": "wjy",
+				"age": 26,
+				"sex": "female"
+			};
+			var keys = [];
+			var values = [];
+			// 不使用hasOwnProperty方法过滤会产生的问题
+			// for (var key in obj) {
+			//	 keys.push(key);
+			//	 values.push(obj[key]);
+			// }
+			for (var key in obj) {
+				if (obj.hasOwnProperty(key) === true) {
+					keys.push(key);
+					values.push(obj[key]);
+				}
+			}
+			console.log("keys is -----" + keys + "-----" + " and values is -----" + values);
+			console.log("-------------------------------------------");
+
+			// 布尔类型与其它任何类型进行比较，布尔类型将会转换为number类型，Number([])返回0所以第二题为true
+			// Number转换类型的参数如果为对象返回的就是NaN，那么Number({})返回的就是NaN，通过Object.prototype.toString.call({})来判断类型，0与NaN相比为false
+			console.log("布尔类型里只有这几参数个返回false");
+			console.log(Boolean(undefined));
+			console.log(Boolean(null));
+			console.log(Boolean(0));
+			console.log(Boolean(NaN));
+			console.log(Boolean(''));
+			console.log("下面为题目返回值");
+			console.log(([]) ? true : false);
+			console.log(([] == false ? true : false));
+			console.log(({} == false) ? true : false);
+			console.log("-------------------------------------------");
+
+			// var val;
+			// console.log('Value is ' + (val != '0') ? 'define' : 'undefine');
+			// console.log("-------------------------------------------");
+
+			// (function() {
+			// 	  var a = b = 5;
+			//   })();   
+			// console.log(b);
+			// console.log(a);
+			// console.log("-------------------------------------------");
+
+
+			console.log({} == false);
+		</script>
+	</body>
+</html>

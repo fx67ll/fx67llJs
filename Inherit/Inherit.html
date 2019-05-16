@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>继承</title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		//为什么要用继承？
+		//1.js中的继承一般通过call()和apply()两种方式完成，js中的继承是以复制的形式完成的，复制一个父对象
+		//js中的继承只是形式上的对面向对象语言的一种模仿，本质上不是继承，但用起来效果是一样的
+		//2.至于为什么要继承：通常在一般的项目里不需要，因为应用简单，但你要用纯js做一些复杂的工具或框架系统就要用到了
+		//比如webgis、或者js框架如jquery、ext什么的，不然一个几千行代码的框架不用继承得写几万行，甚至还无法维护
+		//3.下面六种继承方式使用时候的优先度5>6>2>3>1>4
+		
+		//定义一个动物类
+		function Animal(name){
+			//属性
+			this.name = name || 'Animal';
+			//实例方法
+			this.sleep = function(){
+				console.log(this.name + '正在睡觉！');
+			}
+		}
+		//原型方法
+		Animal.prototype.eat = function(food){
+			console.log(this.name +'正在吃：'+ food);
+		}
+		
+		//定义一个人物类
+		function People(name){
+			//属性
+			this.name = name || 'People';
+			//实例方法
+			this.run = function(){
+				console.log(this.name + '正在跑步！');
+			}
+		}
+		//原型方法
+		People.prototype.find = function(sth){
+			console.log(this.name +'正在找：'+ sth);
+		}
+		
+		//定义一个东西类,用于测试拷贝继承里的多继承
+		function Something(name,age,weight){
+			//属性
+			this.name = name || 'Something';
+			this.age = age || '22';
+			this.weight = weight || '192';
+			//实例方法
+			this.change = function(){
+				console.log(this.name + '正在变化！');
+			}
+			this.broke = function(){
+				console.log(this.name + '被打坏了！');
+			}
+		}
+		
+		
+		//第一种方式:原型链继承,核心是将父类的实例作为子类的原型
+		//优点
+		//1.非常纯粹的继承关系，实例是子类的实例，也是父类的实例
+		//2.父类新增原型方法/原型属性，子类都能访问到
+		//3.简单，易于实现
+		//缺点
+		//1.要想为子类新增属性和方法，必须要在new Animal()这样的语句之后执行，不能放到构造器中
+		//2.无法实现多继承
+		//3.来自原型对象的所有属性被所有实例共享（来自原型对象的引用属性是所有实例共享的）（详细请看附录代码： 示例1）
+		//4.创建子类实例时，无法向父类构造函数传参
+		function Cat0(){}
+		Cat0.prototype = new Animal();
+		Cat0.prototype.name = 'Cat';
+		function Peo0(){}
+		Peo0.prototype = new People();
+		Peo0.prototype.name = 'Peo';
+		//Test Code
+		var cat = new Cat0();
+		var peo = new Peo0();
+		console.log(cat.name);
+		console.log(cat.eat('fish'));
+		console.log(cat.sleep());
+		console.log(peo.find('Rice'));
+		console.log(peo.run());
+		//instanceof 运算符用来检测 constructor.prototype 是否存在于参数 object 的原型链上
+		console.log(cat instanceof Animal);
+		console.log(cat instanceof Cat0);
+		console.log(peo instanceof People);
+		console.log(peo instanceof Peo0);
+		console.log("-----------------原型链继承-----------------");
+		
+		
+		//第二种方式:构造继承,核心是使用父类的构造函数来增强子类实例，等于是复制父类的实例属性给子类（没用到原型）
+		//优点
+		//1.解决了1中，子类实例共享父类引用属性的问题
+		//2.创建子类实例时，可以向父类传递参数
+		//3.可以实现多继承（call多个父类对象）
+		//缺点
+		//1.实例并不是父类的实例，只是子类的实例
+		//2.只能继承父类的实例属性和方法，不能继承原型属性/方法
+		//3.无法实现函数复用，每个子类都有父类实例函数的副本，影响性能
+		function Much(name){
+			Animal.call(this);
+			People.call(this);
+			this.name = name || 'Tom';
+		}
+		//Test Code
+		var much = new Much();
+		console.log(much.name);
+		console.log(much.sleep());
+		console.log(much.run());
+		console.log(much instanceof Animal);
+		console.log(much instanceof People);
+		console.log(much instanceof Much);
+		console.log("------------------构造继承----------------");
+		
+		
+		//第三种方式:实例继承,核心是为父类添加新特性,作为子例实例返回
+		//优点
+		//1.不限制调用方式，不管是new 子类()还是子类().回的对象具有相同的效果
+		//缺点
+		//1.实例是父类的实例，不是子类的实例
+		//2.不支持多继承
+		function Ret(name){
+			var instance = new Animal();
+			instance.name = name || 'Wade';
+			return instance;
+		}
+		//Test Code
+		var ret = new Ret();
+		console.log(ret.name);
+		console.log(ret.sleep());
+		console.log(Ret().name);
+		console.log(Ret().sleep());
+		console.log(ret instanceof Animal);
+		console.log(ret instanceof Ret);
+		console.log("-----------------实例继承-----------------");
+		
+		
+		//第四种方式:拷贝继承
+		//优点
+		//1.支持多继承
+		//缺点
+		//1.效率较低，内存占用高（因为要拷贝父类的属性）
+		//2.无法获取父类不可枚举的方法（不可枚举方法，不能使用for in 访问到）
+		function Copy(name){
+			var sth = new Something();
+			for(var i in sth){
+				Copy.prototype[i] = sth[i];
+			}
+		}
+		//Test Code
+		var copy = new Copy();
+		console.log(copy.name);
+		console.log(copy.age);
+		console.log(copy.weight);
+		console.log(copy.change());
+		console.log(copy.broke());
+		console.log(copy instanceof Something);
+		console.log(copy instanceof Copy);
+		console.log("------------------拷贝继承----------------");
+		
+		
+		//第五种方式:组合继承,核心是通过调用父类构造，继承父类的属性并保留传参的优点，然后通过将父类实例作为子类原型，实现函数复用
+		//优点
+		//1.弥补了方式2的缺陷，可以继承实例属性/方法，也可以继承原型属性/方法
+		//2.既是子类的实例，也是父类的实例
+		//3.不存在引用属性共享问题
+		//4.可传参
+		//5.函数可复用
+		//缺点
+		//1.调用了两次父类构造函数，生成了两份实例（子类实例将子类原型上的那份屏蔽了）
+		function Compose(name){
+			Animal.call(this);
+			this.name = name || 'Tom & Wade';
+		}
+		Compose.prototype = new Animal();
+		//Test Code
+		var comp = new Compose();
+		console.log(comp.name);
+		console.log(comp.sleep());
+		console.log(comp instanceof Animal);
+		console.log(comp instanceof Compose);
+		console.log("------------------组合继承----------------");
+		
+		
+		//第六种方式:组合寄生继承,核心是通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
+		//优点
+	</script>
+</html>
