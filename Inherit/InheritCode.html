@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>继承代码理解训练</title>
+	</head>
+	<body>
+		<h1>JS实现继承的基本方法</h1>
+		<h1>1.原型链继承</h1>
+		<h1>2.构造继承</h1>
+		<h1>3.实例继承</h1>
+		<h1>4.拷贝继承</h1>
+		<h1>5.组合继承</h1>
+		<h1>6.寄生组合继承</h1>
+	</body>
+	<script type="text/javascript">
+		function Animal(name) {
+			this.name = name || 'Animal';
+			this.sleep = function() {
+				console.log(this.name + ' is sleeping now!');
+			}
+		}
+		Animal.prototype.eat = function(food) {
+			console.log(this.name + ' is eating ' + food +'!');
+		}
+		
+		console.log('1.原型链继承');
+		function Cat(){};
+		Cat.prototype = new Animal();
+		Cat.prototype.name = 'Kitty';
+		console.log('-----------Test------------');
+		var cat = new Cat();
+		console.log(cat.name);
+		cat.sleep();
+		cat.eat('fish');
+		console.log(cat instanceof Animal);
+		console.log(cat instanceof Cat);
+		console.log(Cat);
+		console.log(cat);
+		console.log('---------------------------');
+		
+		
+		console.log('2.构造继承');
+		function Dog(name){
+			console.log(this);
+			Animal.call(this);
+			console.log(this);
+			this.name = name || 'Tom';
+		}
+		console.log('-----------Test------------');
+		var dog = new Dog();
+		console.log(dog.name);
+		dog.sleep();
+		console.log(dog instanceof Animal);
+		console.log(dog instanceof Dog);
+		console.log(dog);
+		Dog('DeDe');
+		var dogD = new Dog('DeDe');
+		console.log(dogD);
+		console.log('---------------------------');
+		
+		
+		console.log('3.实例继承');
+		function Bird(name){
+			var instance = new Animal();
+			instance.name = name || 'Tiny';
+			return instance;
+		}
+		console.log('-----------Test------------');
+		var bird = new Bird();
+		console.log(bird.name);
+		bird.sleep();
+		console.log(bird instanceof Animal);
+		console.log(bird instanceof Bird);
+		console.log('---------------------------');
+		
+		
+		console.log('4.拷贝继承');
+		function Mouse(name){
+			var animal = new Animal();
+			for(var p in animal){
+				console.log(p);
+				Mouse.prototype[p] = animal[p];
+			}
+			Mouse.prototype.name = name || 'Jerry';
+		}
+		console.log('-----------Test------------');
+		var mouse = new Mouse();
+		console.log(mouse.name);
+		mouse.sleep();
+		console.log(mouse instanceof Animal);
+		console.log(mouse instanceof Mouse);
+		console.log(mouse);
+		console.log('---------------------------');
+		
+		
+		console.log('5.组合继承');
+		function Panda(name){
+			Animal.call(this);
+			this.name = name || 'Baby';
+		}
+		Panda.prototype = new Animal();
+		Panda.prototype.constructor = Panda;
+		console.log('组合继承需要修复构造函数指向？是什么意思需要继续抽个时间看一下！');
+		console.log('-----------Test------------');
+		var panda = new Panda();
+		console.log(panda.name);
+		panda.sleep();
+		console.log(panda instanceof Animal);
+		console.log(panda instanceof Panda);
+		console.log(panda);
+		console.log('---------------------------');
+		
+		
+		console.log('6.寄生组合继承');
+		function Pig(name){
+			Animal.call(this);
+			this.name = name || 'Pie';
+		}
+		(function(){
+			var Super = function(){};
+			Super.prototype = Animal.prototype;
+			Pig.prototype = new Super();
+		})();
+		console.log('-----------Test------------');
+		var pig = new Pig();
+		console.log(pig.name);
+		pig.sleep();
+		console.log(pig instanceof Animal);
+		console.log(pig instanceof Pig);
+		console.log(pig);
+		console.log('---------------------------');
+	</script>
+</html>

@@ -14,6 +14,8 @@
 		//比如webgis、或者js框架如jquery、ext什么的，不然一个几千行代码的框架不用继承得写几万行，甚至还无法维护
 		//3.下面六种继承方式使用时候的优先度5>6>2>3>1>4
 		
+		//当时对这个不太理解，所以基本就照着原页面抄了一份代码，现在按照自己的理解重新撸了一遍
+		
 		//定义一个动物类
 		function Animal(name){
 			//属性
@@ -185,6 +187,25 @@
 		
 		
 		//第六种方式:组合寄生继承,核心是通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点
-		//优点
+		//特点
+		//1.堪称完美
+		//缺点
+		//1.实现复杂(其实也不算缺点)
+		function Parasitic(name){
+			Animal.call(this);
+			this.name = name || 'Jelly';
+		}
+		(function(){
+			var Super = new Animal();
+			Super.prototype = Animal.prototype;
+			Parasitic.prototype = new Super();
+		})();
+		//Test Code
+		var parasitic = new Parasitic();
+		console.log(parasitic.name);
+		parasitic.sleep();
+		console.log(parasitic instanceof Animal);
+		console.log(parasitic instanceof Parasitic);
+		console.log("----------------寄生组合继承---------------");
 	</script>
 </html>
