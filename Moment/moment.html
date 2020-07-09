@@ -2,8 +2,26 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>Momentjs基本Api</title>
 	</head>
 	<body>
+		<h1>Momentjs基本Api</h1>
 	</body>
+	<script src="./moment.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		console.log('获取当前日期时间');
+		var now = moment();
+		console.log(now);
+		console.log('---------------------------------');
+		
+		console.log('解析字符串');
+		var day = moment('2020-07-07');
+		console.log(day);
+		console.log('判断字符串是否可以解析');
+		console.log(moment('not a real day').isValid());
+		console.log('---------------------------------');
+		
+		console.log('按格式返回能够解析的字符串');
+		console.log(moment('20390108','YYYY-DD-MM')); 
+	</script>
 </html>
