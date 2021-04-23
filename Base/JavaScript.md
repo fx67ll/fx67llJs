@@ -73,3 +73,75 @@ ECMAScript 描述了 JavaScript 的语法和基本对象
 
 一句话描述就是，ECMAScript 是一套规范，JavaScript 则是 ECMAScript 一种实现  
 为什么说是一种实现呢，因为 Adobe ActionScript 同样也实现了 ECMAScript，JScript 也同样实现了 ECMAScript
+
+### 什么是闭包？
+变量的作用域有两种：全局变量和局部变量  
+函数内部可以直接读取全局变量  
+在函数外部无法读取函数内的局部变量  
+能够读取其他函数内部变量的函数，就是闭包  
+可以把闭包简单理解成***定义在一个函数内部的函数***
+在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁  
+
+```
+function f1() {
+	var n = 999;
+	function f2() {
+		alert(n);
+	}
+	return f2;
+}
+var result = f1();
+result(); // 999
+```
+
+### 闭包的作用？
++ 读取函数内部的变量  
++ 让这些变量的值始终保持在内存中，因为局部变量在函数调用玩之后，就会被销毁不会存在内存中  
+
+### 函数声明的相关知识点
+函数内部声明变量的时候，一定要使用var命令  
+如果不用的话，你实际上声明了一个全局变量
+
+[闭包相关资料学习自 -> 阮一峰的博文'学习Javascript闭包（Closure）'](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html "学习Javascript闭包（Closure）")
+
+### 什么是原型和原型链？
+Javascript 只有一种结构，那就是：对象  
+在 javaScript 中，每个对象都有一个指向它的原型（prototype）对象的内部链接  
+这个原型对象又有自己的原型，直到某个对象的原型为 null 为止（也就是不再有原型指向），组成这条链的最后一环  
+这种一级一级的链结构就称为原型链  
+简单来说，原型就是JS继承的基础  
+
+### 关于原型的相关知识点
++ 每个函数都有个prototype属性，它指向空的Object对象（原型对象）
++ 原型对象中包含constructor属性指向构造函数
+
+### 什么对象没有原型？
++ 完全的数据字典，使用`Object.create()`方法创建一个新对象
++ 使用现有的对象来提供新创建的对象的`__proto__`
+
+### prototype 和 `__proto__` 的区别
++ 每个函数都有一个prototype即显式原型属性（原型对象，函数定义时添加此属性）
++ 每个实例对象都有一个`__proto__`即隐式原型属性（创建实例对象时添加此属性）
++ 实例对象的`__proto__`（隐式原型）等于其构造函数的prototype（显式原型）
+
+```
+// 对象的隐式原型=构造函数的显式原型
+function User() {};
+let obj1 = new User(); // Object
+console.log(obj1.__proto__ == User.prototype) // true
+console.log(obj1.prototype == User.prototype) // false
+```
+
+![propotype和__proto__的区别](./lib/img/propotype和__proto__的区别.png "propotype和__proto__的区别")
+
+### 关于原型链的知识点
++ 对象中方法的优先级高于原型中方法的优先级
++ 如果创建的实例对象调用某个方法，会先去对象中找，若没有去该对象的原型对象（父亲）中找
+
+![原型链示意](./lib/img/原型链示意.png "原型链示意")
+
+### console.log() 和 console.dir() 的区别
++ `console.log()`会在浏览器控制台打印出信息
++ `console.dir()`可以显示一个对象的所有属性和方法
+
+[原型、原型链相关资料学习自 -> 彻底理解什么是原型、原型链'](https://blog.csdn.net/qq_45731083/article/details/113406394 "彻底理解什么是原型、原型链")
