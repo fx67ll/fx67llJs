@@ -1,6 +1,6 @@
 console.log('测试ES6中对象新增的一些内容');
 
-console.log('---------------------------------')
+console.log('=================================')
 console.log('Object.is()，判断对象是否相等')
 console.log(+0 === -0)
 console.log(NaN === NaN)
@@ -10,9 +10,9 @@ console.log(Object.is({
 	a: 1
 }))
 console.log(Object.is(1, 1))
-console.log('---------------------------------')
 
-console.log('---------------------------------')
+
+console.log('=================================')
 console.log('Object.assign()，拷贝对象')
 const targetObj = {
 	a: 1
@@ -42,9 +42,9 @@ console.log(mixObj)
 console.log(Object.assign(targetObj, {
 	[Symbol('d')]: '4'
 }))
-console.log('---------------------------------')
 
-console.log('---------------------------------')
+
+console.log('=================================')
 console.log('Object.getOwnPropertyDescriptors，返回对象描述属性')
 const desObj = {
 	a: '描述',
@@ -55,13 +55,12 @@ const desObj = {
 }
 Object.getOwnPropertyDescriptor(desObj)
 console.log('这里遇到点问题，抽空详细学习下对象中getset属性重写，再来深入理解下这里的内容')
-console.log('---------------------------------')
 
-console.log('---------------------------------')
+
+console.log('=================================')
 console.log('对象原型链这块完全不懂，需要系统学习！！！')
-console.log('---------------------------------')
 
-console.log('---------------------------------')
+console.log('=================================')
 const testObj = {
 	a: 'abc',
 	b: 123
@@ -109,4 +108,4 @@ const mapMap = new Map().set('a', true).set('b', false);
 console.log(Object.fromEntries(mapMap))
 // 将查询字符串转为对象，这个功能有意思哎
 console.log(Object.fromEntries(new URLSearchParams('params1=123&params2=false')))
-console.log('---------------------------------')
+console.log('=================================')
