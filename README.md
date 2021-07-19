@@ -1,6 +1,9 @@
 # fx67llJs
 javaScript practice
 
+## 0.x.x.202107xx
+* `下一版本`结合java继承继续推进学习  
+
 ## 0.1.3.20210621
 * 开始推进***JavaScript语言精粹 读书笔记***
 
