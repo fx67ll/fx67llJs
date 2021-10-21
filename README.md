@@ -1,6 +1,9 @@
 # fx67llJs
 learn JavaScript
 
+## 0.2.2.20211021
+* 更新笔记：快速入门上手Markdown（未完成，待补充拓展）
+
 ## 0.2.1.20211020
 * 更新笔记：快速入门上手JavaScript中的Promise  
 * 笔记的图片没有添加到网络博客中，git版本是有配图的  
