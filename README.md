@@ -1,6 +1,56 @@
 # fx67llJs
 learn JavaScript
 
+### 主目录说明
+|  js-blog   | js-note  |  js-other  |  js-pratice  |
+|  :----:  |  :----:  |  :----:  |  :----:  |
+| js博客文章  | js学习笔记 | 很久之前的js学习文件 | js练习 |
+
+### 部分次级目录说明
+<table>
+	<tr>
+        <th colspan="3">js-pratice</th>
+    </tr>
+	<tr>
+	    <th>一级目录</th>
+	    <th>二级目录</th>
+	    <th>描述</th>  
+	</tr >
+	<tr >
+	    <td rowspan="3">Array</td>
+	    <td>Basic</td>
+	    <td>数组基本操作</td>
+	</tr>
+	<tr>
+	    <td>Repeat</td>
+	    <td>数组去重操作</td>
+	</tr>
+	<tr>
+	    <td>Sort</td>
+	    <td>数组排序操作</td>
+	</tr>
+	<tr>
+	    <td >Date</td>
+	    <td>Date</td>
+	    <td>日期对象操作</td>
+	</tr>
+	<tr>
+	    <td >Inherit</td>
+	    <td >Inherit</td>
+	    <td >继承对象操作</td>
+	</tr>
+	<tr>
+	    <td >Promise</td>
+	    <td >Promise</td>
+	    <td >Promise对象操作</td>
+	</tr>
+</table>
+
+#### 注意！！！js-other里是废弃内容，不需要关注
+
+## 0.2.3.20211022
+* 添加目录说明  
+
 ## 0.2.2.20211021
 * 更新笔记：快速入门上手Markdown（未完成，待补充拓展）
 
@@ -11,15 +61,13 @@ learn JavaScript
 
 ## 0.2.0.20211019
 * 虽然一直在整理目录，但是原始目录过于杂乱了，参考整理java资料的方式重新分类js资料  
-
-## 0.x.x.202110xx
-* `趁java复习`同步推进js深度复习  
+* 趁java知识体系系统复习同步推进js深度复习
 
 ## 0.1.3.20210621
-* 开始推进***JavaScript语言精粹 读书笔记***
+* 开始推进 ***JavaScript语言精粹 读书笔记***
 
 ## 0.1.2.20210426
-* note-JS待整理到 -> JavaScript.md中
+* `note-JS待整理到 -> JavaScript.md`中
 
 ## 0.1.1.20210423
 * 重新整理分类学习目录
