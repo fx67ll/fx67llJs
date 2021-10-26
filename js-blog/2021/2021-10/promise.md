@@ -263,7 +263,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 [参考文档三  ———— 理解 Javascript 中的 Promise](https://segmentfault.com/a/1190000017312249)  
 [参考文档四  ———— JavaScript Promise 对象](https://www.runoob.com/w3cnote/javascript-promise-object.html)
 
-![谷歌官方文档中关于promise例子](img/谷歌官方文档中关于promise例子.jpg)
+![谷歌官方文档中关于promise例子](img-promise/谷歌官方文档中关于promise例子.jpg)
 
 我是 [fx67ll.com](https://fx67ll.com)，如果您发现本文有什么错误，欢迎在评论区讨论指正，感谢您的阅读！  
 如果您喜欢这篇文章，欢迎访问我的 [本文github仓库地址](https://github.com/fx67ll/fx67llJs/blob/master/js-blog/2021/2021-10/promise.md)，为我点一颗Star，Thanks~ :)  
