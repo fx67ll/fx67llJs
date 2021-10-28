@@ -29,7 +29,7 @@
 1. 构造函数接受一个名为`executor`的函数，此执行函数接受两个`f函数`参数，`resolve`和`reject`。
 
 ```JavaScript
-new Promise( /* executor */ function(resolve, reject { ... }) );
+	new Promise( /* executor */ function(resolve, reject { ... }) );
 ```
 2. Promise通常用于阻塞代码和异步操作，其中包括文件调用，API调用，DB调用，IO调用等等  
 3. 这些异步操作的启动发生在执行函数中，如果异步操作成功，则通过`promise`的创建者调用`resolve()`函数返回预期结果，
