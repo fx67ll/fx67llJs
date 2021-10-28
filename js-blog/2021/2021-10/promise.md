@@ -28,7 +28,7 @@
 ### Promise的创建和用途
 1. 构造函数接受一个名为`executor`的函数，此执行函数接受两个`f函数`参数，`resolve`和`reject`。
 
-```
+```JavaScript
 new Promise( /* executor */ function(resolve, reject { ... }) );
 ```
 2. Promise通常用于阻塞代码和异步操作，其中包括文件调用，API调用，DB调用，IO调用等等  
@@ -37,7 +37,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 4. 由于`promise`会立即执行，我们无法检查`promise`的初始状态，所以创建一个需要时间执行的`promise`最简单的方式就是
 	使用`setTimeOut()`函数，通过浏览器控制台的输出可以直观看到之前所说的状态，以及他的变化过程  
 
-```
+```JavaScript
 	var promiseFir = new Promise(function(resolve, reject) {
 		setTimeout(function() {
 			resolve({
@@ -60,7 +60,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 	+ [Promise.prototype.finally(onFinally) 最终操作](#jumpId-finally)  
 	+ 下面用一个小示例简单快速了解下这三个原型方法的用法
 	
-```
+```JavaScript
 	// 用一个小故事举例，你是一个上学的孩子，你问你的妈妈要一个电话。她说: 这个月底我要买一部手机
 	var momsPromise = new Promise(function(resolve, reject) {
 		momsSavings = 20000;  // 因为妈妈没有足够储蓄所以无法买到礼物  
@@ -99,7 +99,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 1. `Promise.prototype.then()`方法返回的是一个新的`Promise对象`，因此可以采用链式写法  
 2. `Promise.prototype.then()`方法带有以下三个参数：成功回调，失败回调，前进回调，一般情况下只需要实现第一个，后面是可选的  
 
-```
+```JavaScript
 	function ptFir() {
 		return new Promise(function(resolve, reject) {
 			setTimeout(function() {
@@ -143,7 +143,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 1. `Promise.prototype.catch()`方法是`Promise.prototype.then(null, rejection)`的别名，用于指定发生错误时的回调函数  
 2. `Promise对象`的错误具有**"冒泡"**性质，会一直向后传递，直到被捕获为止，也就是说，错误总是会被下一个`catch`语句捕获  
 
-```
+```JavaScript
 	promise().then(function(data) {
 		// todo something
 	}).catch(function(err) {
@@ -156,7 +156,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 #### Promise.prototype.finally(onFinally) 最终操作
 不管`promise对象`最后的状态，在执行完`.then`或`catch`指定的回调函数以后，都会执行`finally`方法指定的回调函数  
 
-```
+```JavaScript
 	promise().then(function(data) {
 		// todo something
 	}).catch(function(err) {
@@ -175,7 +175,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 	如果`Promise.resolve`方法的参数是一个`Promise对象`的实例，则会被原封不动地返回  
 3. `Promise.reject()`方法同上  
 
-```
+```JavaScript
 	var promise = Promise.resolve('Hello，这里是执行成功的内容！');
 	// var promise = Promise.reject('出错了，这里是被发现的错误！');  // 成功和失败只会有一种状态哦  
 	promise.then(function(data) {
@@ -199,7 +199,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 	+ 只有3个方法的状态都变成`fulfilled`，p的状态才会变成`fulfilled`，此时3个方法的返回值组成一个数组，传递给p的回调函数  
 	+ 只要3个方法之中有一个被`rejected`，p的状态就变成`rejected`，此时第一个被`reject`的实例的返回值，会传递给p的回调函数  
 	
-```	
+```	JavaScript
 	function ptFir() {
 		return new Promise(function(resolve, reject) {
 			setTimeout(function() {
@@ -239,7 +239,7 @@ new Promise( /* executor */ function(resolve, reject { ... }) );
 3. 这个`race()`方法有什么用呢？使用场景还是很多的，比如我们可以用`race()`给某个异步请求设置超时时间，
 	并且在超时后执行相应的操作  
 	
-```
+```JavaScript
 	// ptFir(), ptSec(), ptThi() 同上
 	Promise.all([ptFir(), ptSec(), ptThi()]).then(function(data) {
 		console.log(data);
