@@ -4,7 +4,7 @@ learn JavaScript
 ### 主目录说明
 |  js-blog   | js-note  |  js-other  |  js-pratice  |
 |  :----:  |  :----:  |  :----:  |  :----:  |
-| js博客文章  | js学习笔记 | 很久之前的js学习文件 | js练习 |
+|  js博客文章   |  js学习笔记  |  很久之前的js学习文件  |  js练习  |
 
 ### 部分次级目录说明
 <table>
