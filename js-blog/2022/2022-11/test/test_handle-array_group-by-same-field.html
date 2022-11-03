@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let dataArr = [{
+					id: 1,
+					anyId: 1023,
+					anyVal: 'fx67ll',
+					value: 'value-1'
+				},
+				{
+					id: 2,
+					anyId: 1024,
+					anyVal: 'fx67ll',
+					value: 'value-2'
+				},
+				{
+					id: 3,
+					anyId: 10086,
+					anyVal: 'll',
+					value: 'value-3'
+				},
+				{
+					id: 1,
+					anyId: 10086,
+					anyVal: 'fx67',
+					value: 'value-4'
+				},
+				{
+					id: 2,
+					anyId: 1024,
+					anyVal: 'll',
+					value: 'value-5'
+				},
+			];
+
+			function classifyArrayGroupBySameFieldAlpha(arr, filed) {
+				let temObj = {};
+				let resArr = [];
+				for (let i = 0; i < arr.length; i++) {
+					if (!temObj[arr[i][filed]]) {
+						resArr.push({
+							key: arr[i][filed],
+							data: [arr[i]]
+						});
+						temObj[arr[i][filed]] = arr[i]
+					} else {
+						for (let j = 0; j < resArr.length; j++) {
+							if (arr[i][filed] === resArr[j].key) {
+								resArr[j].data.push(arr[i]);
+								break
+							}
+						}
+					}
+				}
+				return resArr
+			}
+
+			function classifyArrayGroupBySameFieldBeta(arr, filed) {
+				let temObj = {}
+				for (let i = 0; i < arr.length; i++) {
+					let item = arr[i]
+					if (!temObj[item[filed]]) {
+						temObj[item[filed]] = [item]
+					} else {
+						temObj[item[filed]].push(item)
+					}
+				}
+				let resArr = []
+				Object.keys(temObj).forEach(key => {
+					resArr.push({
+						key: key,
+						data: temObj[key],
+					})
+				})
+				return resArr
+			}
+
+			const arr_a1 = classifyArrayGroupBySameFieldAlpha(dataArr, 'id');
+			const arr_a2 = classifyArrayGroupBySameFieldAlpha(dataArr, 'anyId');
+			const arr_a3 = classifyArrayGroupBySameFieldAlpha(dataArr, 'anyVal');
+			const arr_b1 = classifyArrayGroupBySameFieldBeta(dataArr, 'id');
+			const arr_b2 = classifyArrayGroupBySameFieldBeta(dataArr, 'anyId');
+			const arr_b3 = classifyArrayGroupBySameFieldBeta(dataArr, 'anyVal');
+
+			console.log(JSON.stringify(arr_a1));
+			console.log(arr_a1);
+			console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+			console.log(JSON.stringify(arr_a2));
+			console.log(arr_a2);
+			console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+			console.log(JSON.stringify(arr_a3));
+			console.log(arr_a3);
+			console.log('-------------------------------------------------------------');
+			console.log('-------------------------------------------------------------');
+			console.log(JSON.stringify(arr_b1));
+			console.log(arr_b1);
+			console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+			console.log(JSON.stringify(arr_b2));
+			console.log(arr_b2);
+			console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+			console.log(JSON.stringify(arr_b3));
+			console.log(arr_b3);
+			console.log('-------------------------------------------------------------');
+			console.log('-------------------------------------------------------------');
+			console.log(JSON.stringify(arr_a1) === JSON.stringify(arr_b1));
+			console.log(JSON.stringify(arr_a2) === JSON.stringify(arr_b2));
+			console.log(JSON.stringify(arr_a3) === JSON.stringify(arr_b3));
+			console.log('-------------------------------------------------------------');
+			console.log('-------------------------------------------------------------');
+			console.log(JSON.stringify(arr_a1));
+			console.log(JSON.stringify(arr_b1));
+			console.log('-------------------------------------------------------------');
+			console.log('-------------------------------------------------------------');
+			console.log(JSON.stringify(arr_a2));
+			console.log(JSON.stringify(arr_b2));
+			console.log('-------------------------------------------------------------');
+			console.log('-------------------------------------------------------------');
+			let a = [{
+				"key": 1,
+				"data": [{
+					"id": 1,
+					"anyId": 1023,
+					"anyVal": "fx67ll",
+					"value": "value-1"
+				}, {
+					"id": 1,
+					"anyId": 10086,
+					"anyVal": "fx67",
+					"value": "value-4"
+				}]
+			}, {
+				"key": 2,
+				"data": [{
+					"id": 2,
+					"anyId": 1024,
+					"anyVal": "fx67ll",
+					"value": "value-2"
+				}, {
+					"id": 2,
+					"anyId": 1024,
+					"anyVal": "ll",
+					"value": "value-5"
+				}]
+			}, {
+				"key": 3,
+				"data": [{
+					"id": 3,
+					"anyId": 10086,
+					"anyVal": "ll",
+					"value": "value-3"
+				}]
+			}];
+		</script>
+	</body>
+</html>
