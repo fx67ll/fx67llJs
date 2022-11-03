@@ -1,11 +1,11 @@
-# js数组操作————对象数组根据某个相同的字段分组
+# js数组操作——对象数组根据某个相同的字段分组  
 
 ### 先说点废话
 最近在实际业务中，需要编写一个方法根据数组中每一个对象的一个相同字段，来将该字段值相等的对象重新编入一个数组，返回一个嵌套的数组对象，特地来做个总结。
 当然需要注意的是，在开发过程这种数组的处理函数，应当被编写到项目的公共工具函数库中全局调用  
 
 #### 目标对象数组
-```
+```javascript
 let dataArr = [{
 		id: 1,
 		anyId: 1023,
@@ -40,7 +40,7 @@ let dataArr = [{
 ```
 
 #### 准换后的对象数组
-```
+```json
 [{
 	"key": 1,
 	"data": [{
@@ -85,7 +85,7 @@ let dataArr = [{
 3. 最后，返回处理完成的对象数组  
 
 #### 方法一
-```
+```javascript
 // arr 目标对象数组
 // filed 分组字段
 function classifyArrayGroupBySameFieldAlpha(arr, filed) {
@@ -110,7 +110,7 @@ function classifyArrayGroupBySameFieldAlpha(arr, filed) {
 ```
 
 #### 方法二
-```
+```javascript
 // arr 目标对象数组
 // filed 分组字段
 function classifyArrayGroupBySameFieldVBeta(arr, filed) {
