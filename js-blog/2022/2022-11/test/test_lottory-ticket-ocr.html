@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let testWTStr = "A. 14581023 - 5";
+			let testWTStr0 = "A. 123456 - 5";
+			let testWTStr1 = "A. 1234510 - 5";
+			let testWTStr2 = "A. 12341011 - 5";
+			let testWTStr3 = "A. 123101112 - 5";
+			let testWTStr4 = "A. 1210111213 - 5";
+			let testWTStr5 = "A. 11011121314 - 5";
+			let testWTStr6 = "A. 121323242526 - 5";
+
+			console.log(classifyWelfareTicketStr(testWTStr));
+			console.log(classifyWelfareTicketStr(testWTStr0));
+			console.log(classifyWelfareTicketStr(testWTStr1));
+			console.log(classifyWelfareTicketStr(testWTStr2));
+			console.log(classifyWelfareTicketStr(testWTStr3));
+			console.log(classifyWelfareTicketStr(testWTStr4));
+			console.log(classifyWelfareTicketStr(testWTStr5));
+			console.log(classifyWelfareTicketStr(testWTStr6));
+
+			function classifyWelfareTicketStr(str) {
+				let testArr = [];
+				let resArr = [];
+				let redBallStr = str.split('-')[0].split('.')[1].trim();
+				let blueBallNum = parseInt(str.split('-')[1].trim());
+				Object.values(redBallStr).forEach(function(item) {
+					testArr.push(parseInt(item));
+				});
+				if (testArr.length > 12 || testArr.length < 6 || !blueBallNum) {
+					console.error('OCR 结果异常 ');
+					return [];
+				}
+				if (testArr.length === 6) {
+					resArr = testArr;
+				}
+				if (testArr.length === 7) {
+					for (let i = 0; i < testArr.length; i += 1) {
+						if (i < 5) {
+							resArr.push(testArr[i]);
+						}
+						if (i === 5) {
+							resArr.push(testArr[i] * 10 + testArr[i + 1]);
+						}
+					}
+				}
+				if (testArr.length === 8) {
+					for (let i = 0; i < testArr.length; i += 1) {
+						if (i < 4) {
+							resArr.push(testArr[i]);
+						}
+						if (i === 4 || i === 6) {
+							resArr.push(testArr[i] * 10 + testArr[i + 1]);
+						}
+					}
+				}
+				if (testArr.length === 9) {
+					for (let i = 0; i < testArr.length; i += 1) {
+						if (i < 3) {
+							resArr.push(testArr[i]);
+						}
+						if (i > 2 && i % 2 === 1) {
+							resArr.push(testArr[i] * 10 + testArr[i + 1]);
+						}
+					}
+				}
+				if (testArr.length === 10) {
+					for (let i = 0; i < testArr.length; i += 1) {
+						if (i < 2) {
+							resArr.push(testArr[i]);
+						}
+						if (i > 1 && i % 2 === 0) {
+							resArr.push(testArr[i] * 10 + testArr[i + 1]);
+						}
+					}
+				}
+				if (testArr.length === 11) {
+					for (let i = 0; i < testArr.length; i += 1) {
+						if (i === 0) {
+							resArr.push(testArr[i]);
+						}
+						if (i > 0 && i % 2 === 1) {
+							resArr.push(testArr[i] * 10 + testArr[i + 1]);
+						}
+					}
+				}
+				if (testArr.length === 12) {
+					testArr.reduce(function(res, item, index) {
+						if ((index + 1) % 2 !== 0) {
+							res = item * 10;
+						} else {
+							res = res + item;
+							resArr.push(res);
+						}
+						return res;
+					}, testArr[0])
+				}
+				resArr.push(blueBallNum);
+				return resArr;
+			}
+
+			function classifyLottoryTicketStr(str) {
+
+			}
+		</script>
+	</body>
+</html>
