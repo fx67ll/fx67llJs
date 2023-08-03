@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Debounce & Throttle</title>
+	</head>
+	<body>
+
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js" type="text/javascript" charset="utf-8">
+	</script>
+	<script type="text/javascript">
+		// // 测试防抖
+		function submitData(data) {
+			console.log('保存数据:', data);
+		}
+		const debouncedSubmit = _.debounce(submitData, 1000);
+		debouncedSubmit('数据1');
+		debouncedSubmit('数据2');
+		debouncedSubmit('数据3');
+
+		// 测试节流
+		function fetchData(data) {
+			console.log('拉取数据:', data);
+		}
+		const throttledFn = _.throttle(fetchData, 2000);
+		throttledFn('数据1');
+		throttledFn('数据2');
+		setTimeout(() => {
+			throttledFn('数据3');
+		}, 1000);
+	</script>
+</html>
