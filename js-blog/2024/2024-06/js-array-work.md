@@ -99,7 +99,7 @@ console.log(numbers); // 输出: [10, 100, 1000, 2, 5]
 - 如果比较函数返回0，那么元素`a`和`b`的顺序不变。
 
 ### `sort()`方法自定义排序的基础示例
-#### 数字排序
+#### 1. 数字排序
 对于数字类型的数组，可以这样定义比较函数来确保数组按照数值大小升序或降序排列：
 ```javascript
 let numbers = [10, 5, 100, 2, 1000];
@@ -111,7 +111,7 @@ numbers.sort((a, b) => b - a);
 console.log(numbers); // 输出: [1000, 100, 10, 5, 2]
 ```
 
-#### 字符串排序（考虑大小写）
+#### 2. 字符串排序（考虑大小写）
 对于字符串数组，如果要按字典顺序排序，可能还需要考虑大小写：
 ```javascript
 let words = ['banana', 'Apple', 'orange'];
@@ -120,7 +120,7 @@ words.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 console.log(words); // 输出: ['Apple', 'banana', 'orange']
 ```
 
-#### 复杂对象数组排序
+#### 3. 复杂对象数组排序
 如果数组包含对象，可以根据对象的某个属性来排序：
 ```javascript
 let items = [
@@ -141,7 +141,7 @@ console.log(items); // 输出: [{ name: "Mike", age: 22 }, { name: "John", age: 
 
 
 ## 如何去除数组中的重复元素
-### 使用 `Set` 对象
+### 1. 使用 `Set` 对象
 `Set` 是一种允许存储任何类型唯一值的集合。由于 `Set` 自动去除重复的元素，我们可以利用这个特性来去除数组中的重复项。
 ```javascript
 const array = [1, 2, 2, 3, 4, 4, 5];
@@ -149,7 +149,7 @@ const uniqueArray = [...new Set(array)];
 console.log(uniqueArray); // 输出: [1, 2, 3, 4, 5]
 ```
 
-### 使用 `filter()` 方法
+### 2. 使用 `filter()` 方法
 `filter()` 方法创建一个新数组，其包含通过所提供函数实现的测试的所有元素。可以利用这个方法和 `indexOf()` 来过滤掉重复的元素。
 ```javascript
 const array = [1, 2, 2, 3, 4, 4, 5];
@@ -157,7 +157,7 @@ const uniqueArray = array.filter((item, index) => array.indexOf(item) === index)
 console.log(uniqueArray); // 输出: [1, 2, 3, 4, 5]
 ```
 
-### 使用 `reduce()` 方法
+### 3. 使用 `reduce()` 方法
 `reduce()` 方法对数组中的每个元素执行一个 reducer 函数（升序执行），将其结果汇总为单个返回值。这个方法也可以用来去除重复元素。
 ```javascript
 const array = [1, 2, 2, 3, 4, 4, 5];
@@ -170,7 +170,7 @@ const uniqueArray = array.reduce((acc, current) => {
 console.log(uniqueArray); // 输出: [1, 2, 3, 4, 5]
 ```
 
-### 使用对象键
+### 4. 使用对象键
 利用对象的属性不能重复的特性，可以快速去除数组中的重复元素。
 ```javascript
 const array = [1, 2, 2, 3, 4, 4, 5];
@@ -190,14 +190,14 @@ console.log(uniqueArray); // 输出: [1, 2, 3, 4, 5]
 - **较可靠的方法**：`Object.prototype.toString.call()`，尤其是在涉及多个执行环境时。
 - **其他方法**：虽然 `instanceof`、`constructor` 和 `isPrototypeOf` 可以用来判断数组，但它们在某些情况下可能不够可靠或容易受到环境的影响。
 
-### 使用 `Array.isArray()` 方法（推荐）
+### 1. 使用 `Array.isArray()` 方法（推荐）
 `Array.isArray()` 是 ECMAScript 5 新增的方法，它提供了一种简单、可靠的方式来判断一个变量是否是数组。这是判断数组的最推荐方式。
 ```javascript
 let arr = [1, 2, 3];
 console.log(Array.isArray(arr)); // 输出：true
 ```
 
-### 使用 `instanceof` 操作符
+### 2. 使用 `instanceof` 操作符
 `instanceof` 操作符用于测试一个对象在其原型链中是否存在一个构造函数的 `prototype` 属性。
 ```javascript
 let arr = [1, 2, 3];
@@ -205,7 +205,7 @@ console.log(arr instanceof Array); // 输出：true
 ```
 但是，`instanceof` 可能在不同的执行环境（如不同的iframe或window对象）中不一定可靠，因为数组的构造器可能不同。
 
-### 使用 `Object.prototype.toString.call()`
+### 3. 使用 `Object.prototype.toString.call()`
 这是一个更加通用的方法，可以用来获取任意对象的类型。对于数组，`Object.prototype.toString.call()` 返回 `"[object Array]"`。
 ```javascript
 let arr = [1, 2, 3];
@@ -213,14 +213,14 @@ console.log(Object.prototype.toString.call(arr) === '[object Array]'); // 输出
 ```
 这种方法相对可靠，并且在不同的执行环境中也能保持一致性。
 
-### 使用构造函数属性 `constructor`
+### 4. 使用构造函数属性 `constructor`
 每个数组都有一个 `constructor` 属性，指向它的构造函数。如果这个属性是 `Array`，那么对象通常是数组。但这种方法不是非常可靠，因为 `constructor` 属性可以被改写。
 ```javascript
 let arr = [1, 2, 3];
 console.log(arr.constructor === Array); // 输出：true
 ```
 
-### 使用 `Array.prototype.isPrototypeOf()`
+### 5. 使用 `Array.prototype.isPrototypeOf()`
 这个方法可以用来检查 `Array.prototype` 是否存在于某个对象的原型链上。
 ```javascript
 let arr = [1, 2, 3];
@@ -257,7 +257,6 @@ if (undefined) {} // 不执行
 if (NaN) {} // 不执行
 if ([]) {} // 执行，因为空数组是 true
 ```
-
 
 
 
